@@ -59,3 +59,15 @@ for obj in capitales[:3]:
     print(obj)
 
 
+# ───────────────────────────────────────────────────────────
+# :::::::::::::::::::::::::: PAISES :::::::::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+print("\n LISTA DE PAISES \n")
+# Recorremos las ciudades y solo guardamos los Países diferentes 
+# en un conjunto que luego lo transformamos a una lista
+paisesConjunto = set(ciudad['Pais'] for ciudad in ciudades)
+paisesLista = list(paisesConjunto)
+print(paisesLista)
+
+
