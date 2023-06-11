@@ -162,3 +162,61 @@ for ciudadA in ciudades:
 print(matriz_distancias)
 
 
+# ───────────────────────────────────────────────────────────
+# ::::::::::::::::::::: EXCEL PARA NODOS ::::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+# Crear un nuevo libro de Excel
+excel_nodos = openpyxl.Workbook()
+
+# Seleccionar la hoja activa
+hoja = excel_nodos.active
+
+# Agregar encabezados
+hoja["A1"] = "ID"
+hoja["B1"] = "Label"
+
+# Agregar datos de ciudades en filas
+for i, ciudad in enumerate(ciudades, start=2):
+    hoja["A{}".format(i)] = ciudad['Id']
+    hoja["B{}".format(i)] = ciudad['Nombre']
+
+# Guardar el archivo de Excel
+excel_nodos.save("Nodos.xlsx")
+
+
+# ───────────────────────────────────────────────────────────
+# ::::::::::::::::::::: EXCEL PARA LINKS ::::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+# Crear un nuevo libro de Excel
+excel_links = openpyxl.Workbook()
+
+# Seleccionar la hoja activa
+hoja = excel_links.active
+
+# Agregar encabezados
+hoja["A1"] = "Source"
+hoja["B1"] = "Target"
+hoja["C1"] = "Weight"
+hoja["D1"] = "Label"
+hoja["E1"] = "Type"
+
+# Agregar datos de relaciones en filas
+cont = 2
+for i, ciudadA in enumerate(ciudades, start=2):
+    for j, ciudadB in enumerate(ciudades, start=2):
+
+        id_A = ciudadA['Id']
+        id_B = ciudadB['Id']
+
+        if matriz_distancias[id_A][id_B] != 0:
+            hoja["A{}".format(cont)] = ciudadA['Id']
+            hoja["B{}".format(cont)] = ciudadB['Id']
+            hoja["C{}".format(cont)] = matriz_distancias[id_A][id_B]
+            hoja["D{}".format(cont)] = "camino"
+            hoja["E{}".format(cont)] = "Undirected"
+            cont += 1
+
+# Guardar el archivo de Excel
+excel_links.save("Links.xlsx")
