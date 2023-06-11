@@ -37,3 +37,25 @@ print("\n ARREGLO DE CIUDADES \n")
 for obj in ciudades[:3]:
     print(obj)
 
+
+# ───────────────────────────────────────────────────────────
+# :::::::::::::::::::::::: CAPITALES ::::::::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+# Arreglo para almacenar los IDs de las ciudades capitales
+capitales = []
+
+# Recorrer el arreglo ciudades y obtener los IDs de las ciudades capitales
+for obj in ciudades:
+    if obj['Tipo_de_capital'] == 'primary':
+        id = obj['Id']
+        capitales.append(id)
+
+# Imprimir el arreglo de ciudades capitales
+# Las posiciones son 2 lugares por debajo de lo que dicta el excel,
+# ya que el indice empieza en 0 y se opmite los titulos de las columnas.
+print("\n ARREGLO IDs DE CAPITALES \n")
+for obj in capitales[:3]:
+    print(obj)
+
+
