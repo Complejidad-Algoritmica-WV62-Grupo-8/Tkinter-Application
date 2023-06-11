@@ -114,3 +114,51 @@ for ciudadA in ciudades:
 print(matriz_relaciones)
 
 
+# ───────────────────────────────────────────────────────────
+# ::::::::::::::::::: MATRIZ DE DISTANCIAS ::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+def calcular_distancia(lat1, lon1, lat2, lon2):
+    # Radio de la Tierra en kilómetros
+    radio_tierra = 6371.0
+
+    # Convertir las latitudes y longitudes de grados a radianes
+    lat1_rad = math.radians(lat1)
+    lon1_rad = math.radians(lon1)
+    lat2_rad = math.radians(lat2)
+    lon2_rad = math.radians(lon2)
+
+    # Diferencias entre las latitudes y longitudes
+    dlat = lat2_rad - lat1_rad
+    dlon = lon2_rad - lon1_rad
+
+    # Calcular la fórmula de Haversine
+    a = math.sin(dlat/2)**2 + math.cos(lat1_rad) * \
+        math.cos(lat2_rad) * math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    distancia = radio_tierra * c
+
+    return distancia
+
+
+print("\n MATRIZ DE DISTANCIAS \n")
+matriz_distancias = np.copy(matriz_relaciones)
+
+for ciudadA in ciudades:
+    for ciudadB in ciudades:
+        i = ciudadA['Id']
+        j = ciudadB['Id']
+        if matriz_distancias[i][j] == 1:
+
+            lat_A = ciudadA['Latitud']
+            lng_A = ciudadA['Longitud']
+
+            lat_B = ciudadB['Latitud']
+            lng_B = ciudadB['Longitud']
+
+            matriz_distancias[i][j] = calcular_distancia(
+                lat_A, lng_A, lat_B, lng_B)
+
+print(matriz_distancias)
+
+
