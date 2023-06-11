@@ -16,3 +16,24 @@ df = pd.read_excel(io='C:\\Users\\rafae\\Desktop\\Upc\\Ciclo 6\\Complejidad Algo
 print(df.head(3))
 
 
+# ───────────────────────────────────────────────────────────
+# :::::::::::::::::::::::: CIUDADES :::::::::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+ciudades = []
+for _, row in df.iterrows():
+    obj = {
+        'Id': row['id'],
+        'Nombre': row['city'],
+        'Latitud': row['lat'],
+        'Longitud': row['lng'],
+        'Pais': row['country'],
+        'Tipo_de_capital': row['capital']
+    }
+    ciudades.append(obj)
+
+# Imprimir los primeros 3 objetos del ciudades
+print("\n ARREGLO DE CIUDADES \n")
+for obj in ciudades[:3]:
+    print(obj)
+
