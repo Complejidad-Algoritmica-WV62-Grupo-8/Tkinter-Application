@@ -71,3 +71,46 @@ paisesLista = list(paisesConjunto)
 print(paisesLista)
 
 
+# ───────────────────────────────────────────────────────────
+# ::::::::::::::::::: MATRIZ DE RELACIONES ::::::::::::::::::
+# ───────────────────────────────────────────────────────────
+
+print("\n MATRIZ DE RELACIONES CAPITALES \n")
+# Matriz de ceros de n x n
+n = len(ciudades)
+matriz_relaciones = np.zeros((n, n), dtype=int)
+
+# Relacionamos todos las capitales entre ellas exceptuando ellas mismas
+for capitalA in capitales:
+    for capitalB in capitales:
+        if capitalA != capitalB:
+            matriz_relaciones[capitalA][capitalB] = 1
+
+# np.set_printoptions(threshold=np.inf)
+print(matriz_relaciones)
+
+
+print("\n MATRIZ DE RELACIONES ENTRE CIUDADES DEL MISMO PAIS \n")
+ciudades_mismo_pais = []
+
+for ciudadA in ciudades:
+
+    ciudades_mismo_pais = []
+
+    for ciudadB in ciudades:
+        if ciudadB['Pais'] == ciudadA['Pais'] and ciudadB['Id'] != ciudadA['Id']:
+            ciudades_mismo_pais.append(ciudadB)
+
+    cant_relaciones = random.randint(1, 3)
+    cant_ciudades_mismo_pais = len(ciudades_mismo_pais)
+
+    for _ in range(cant_relaciones):
+        pos_ciudad_aleatoria = random.randint(0, cant_ciudades_mismo_pais - 1)
+        objeto_ciudad = ciudades_mismo_pais[pos_ciudad_aleatoria]
+        id_A = ciudadA['Id']
+        id_B = objeto_ciudad['Id']
+        matriz_relaciones[id_A][id_B] = 1
+
+print(matriz_relaciones)
+
+
